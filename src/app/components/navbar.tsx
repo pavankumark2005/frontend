@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             {/* Navbar */}
-            <header className="bg-blue-500 p-3 fixed top-0 w-full z-50">
+            <header className="bg-blue-500 p-3 fixed top-0 w-full z-50 rounded-lg shadow-lg">
                 <nav className="container mx-auto flex justify-between items-center">
                     <div className="flex items-center space-x-3 rounded-full">
                         <Image
@@ -22,11 +22,11 @@ export default function Navbar() {
                         <div className="text-white text-xl font-semibold">Health One</div>
                     </div>
                     <ul className="flex space-x-6 text-white">
-                        <li><Link href="/" className="hover:text-gray-300">Home</Link></li>
-                        <li><Link href="#about" className="hover:text-gray-300">About Us</Link></li>
-                        <li><Link href="#features" className="hover:text-gray-300">Features</Link></li>
-                        <li><Link href="#team" className="hover:text-gray-300">Team</Link></li>
-                        <li><Link href="/dashboard" className="hover:text-gray-300">Dashboard</Link></li>
+                        <li><Link href="/" className="hover:text-gray-300 hover:underline">Home</Link></li>
+                        <li><Link href="#about" className="hover:text-gray-300 hover:underline">About Us</Link></li>
+                        <li><Link href="#features" className="hover:text-gray-300 hover:underline">Features</Link></li>
+                        <li><Link href="#team" className="hover:text-gray-300 hover:underline">Team</Link></li>
+                        <li><Link href="/dashboard" className="hover:text-gray-300 hover:underline">Dashboard</Link></li>
                     </ul>
 
                     {/* Clerk Authentication */}

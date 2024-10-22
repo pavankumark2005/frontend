@@ -1,60 +1,73 @@
-// src/app/patients/[id]/page.tsx
+import Head from 'next/head';
 
-'use client'; // Ensure this is a client component
-import React, { useEffect, useState } from 'react';
-
-const PatientPage = ({ params }) => {
-  const { id } = params; // Destructure the id directly from params
-  const [patient, setPatient] = useState(null);
-
-  useEffect(() => {
-    if (id) {
-      const fetchPatient = async () => {
-        try {
-          const response = await fetch(`/api/patients/${id}`);
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const data = await response.json();
-          setPatient(data);
-        } catch (error) {
-          console.error('Failed to fetch patient:', error);
-        }
-      };
-
-      fetchPatient();
-    }
-  }, [id]);
-
-  if (!patient) {
-    return <div>Loading...</div>; // Show loading indicator
-  }
-
+export default function Home() {
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4 text-center">Patient Details</h1>
-      <div className="flex items-center mb-4">
-        <img
-          src={patient.ImageURL || "https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg"}
-          alt={patient.Name}
-          className="w-24 h-24 rounded-full mr-4 object-cover"
-        />
-        <div>
-          <h2 className="text-2xl font-extrabold text-gray-800">{patient.Name}</h2>
-          <p className="text-lg font-medium text-gray-700">Age: <span className="font-bold">{patient.Age}</span></p>
-          <p className="text-lg font-medium text-gray-700">Gender: <span className="font-bold">{patient.Gender}</span></p>
+    <div>
+      <Head>
+        <title>Medical Information Page</title>
+        <meta name="description" content="Medical information layout" />
+      </Head>
+
+      <main className="rounded-lg shadow-lg bg-[#98c1d9] p-10 min-h-screen">
+        <h1 className='flex font-bold text-3xl justify-center text-center text-black underline'>Patient Details</h1>
+        <div className="flex">
+          {/* Left Side */}
+          <div className="w-1/3 bg-[#fffaff] p-6 rounded-lg shadow-md">
+            {/* Photo */}
+            <div className="border-2 rounded-lg border-[#285b23] w-48 h-48 flex items-center justify-center">
+              <div className="mb-6">
+                <img
+                  src="C:\Users\Hp\Desktop\code\mani-clerk\public\patinet.png"
+                  alt="photo"
+                  className="w-24 h-24 rounded-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Personal Info */}
+            <div className="mb-6">
+              <p><strong>Name:</strong> John Doe</p>
+              <p><strong>DOB:</strong> Jan 1, 1980</p>
+              <p><strong>Gender:</strong> Male</p>
+              <p><strong>Age:</strong> 44</p>
+              <p><strong>Blood Type:</strong> O+</p>
+            </div>
+
+            {/* Notes */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold mb-2">Notes</h3>
+              <div className="border border-red-400 bg-[#edf2f4] p-4 h-32 rounded-lg">
+                <p>No significant allergies or issues reported.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side */}
+          <div className="w-2/3 ml-10 bg-[#fffaff] p-6 overflow-y-auto max-h-[600px] relative rounded-lg shadow-md">
+            <h3 className="text-lg font-bold mb-4 text-bold underline">Medical Details</h3>
+
+            {/* Medical Information */}
+            <div className="space-y-4">
+              <p><strong>Medical Condition:</strong> Hypertension</p>
+              <p><strong>Medicine:</strong> Lisinopril 10mg</p>
+              <p><strong>Notes:</strong> Regular blood pressure check required.</p>
+              <p><strong>Medication History:</strong> Started treatment in 2015.</p>
+              <p><strong>Medical Condition:</strong> Asthma</p>
+              <p><strong>Medicine:</strong> Albuterol Inhaler</p>
+              <p><strong>Notes:</strong> Use as needed for shortness of breath.</p>
+              <p><strong>Medical Condition:</strong> Diabetes Type 2</p>
+              <p><strong>Medicine:</strong> Metformin 500mg</p>
+              <p><strong>Notes:</strong> Monitor blood sugar levels regularly.</p>
+              {/* Add more details here to ensure scrolling */}
+            </div>
+
+            {/* Last Checkup Date - Positioned in the top-right corner */}
+            <div className="absolute top-0 right-0 mt-2 mr-2 border border-red-400 p-2 text-sm bg-[#edf2f4] shadow rounded-lg">
+              <strong>Last Checkup Date:</strong> March 15, 2024
+            </div>
+          </div>
         </div>
-      </div>
-      {/* Additional patient details */}
-      <div className="mt-4">
-        <p className="text-lg font-medium text-gray-700">Medical Condition: <span className="font-bold">{patient['Medical Condition ']}</span></p>
-        <p className="text-lg font-medium text-gray-700">Medications: <span className="font-bold">{patient.Medications}</span></p>
-        <p className="text-lg font-medium text-gray-700">Notes: <span className="font-bold">{patient.Notes}</span></p>
-        <p className="text-lg font-medium text-gray-700">Last Checkup Date: <span className="font-bold">{patient['Last checkup date']}</span></p>
-        <p className="text-lg font-medium text-gray-700">Medication History: <pre className="font-bold">{patient['Medication History']}</pre></p>
-      </div>
+      </main>
     </div>
   );
-};
-
-export default PatientPage;
+}

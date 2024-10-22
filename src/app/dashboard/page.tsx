@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface Patient {
-  _id: string; // MongoDB ObjectId as a string
-  Name: string; // Match the case with your database key
-  Age: string;  // Keep as string to match your data format
-  Gender: string; // Match the case with your database key
-  MedicalCondition: string; // Adjusted field name
+  _id: string; 
+  Name: string; 
+  Age: string;  
+  Gender: string; 
+  MedicalCondition: string; 
 }
 
 const Dashboard: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
 
   useEffect(() => {
-    // Fetch patients data from the API
+    
     const fetchPatients = async () => {
       try {
         const response = await fetch('/api/patients');
@@ -25,15 +25,15 @@ const Dashboard: React.FC = () => {
         }
 
         const data = await response.json();
-        console.log('Fetched patients:', data); // Log the fetched data for debugging
-        // Map data to correct structure
+        console.log('Fetched patients:', data); 
+      
         const formattedData = data.map((patient: any) => ({
           _id: patient._id,
           Name: patient.Name,
           Age: patient.Age,
           Gender: patient.Gender,
-          MedicalCondition: patient['Medical Condition '].trim(), // Remove any trailing spaces
-          ImageURL: 'https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg', // Use the specified image URL
+          MedicalCondition: patient['Medical Condition '].trim(), 
+          ImageURL: 'https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg', 
         }));
         setPatients(formattedData);
       } catch (error) {
@@ -45,25 +45,25 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-90 bg-[#c4e9ec]">
       <main className="py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 rounded">
+          <h1 className="text-3xl font-bold underline top-0  text-center">Dashboard</h1>
           <div className="mt-6">
             <h2 className="text-2xl font-bold mb-4">Patients List</h2>
-            <div className="bg-white shadow rounded-lg">
-              <ul className="divide-y divide-gray-200">
+            <div className="bg-[#f3f1fd] shadow rounded-lg">
+              <ul className="divide-y divide-black">
                 {patients.map((patient) => (
-                  <li key={patient._id} className="flex items-center p-4 hover:bg-gray-100">
+                  <li key={patient._id} className="flex items-center p-4 hover:bg-[#f7f0ec] rounded-lg">
                     <img 
 src={patient.ImageURL || "https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg"} // Fallback image                      alt={patient.Name} 
-                      className="w-16 h-16 rounded-full mr-4" // Rounded image
+                      className="w-16 h-16 rounded-full mr-4" 
                     />
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-800">{patient.Name}</h3> {/* Make Name more visible */}
-                      <p className="text-gray-600">Age: {patient.Age}</p>
-                      <p className="text-gray-600">Gender: {patient.Gender}</p>
-                      <p className="text-gray-600">Condition: {patient.MedicalCondition}</p> {/* Display condition */}
+                      <h3 className="text-lg font-bold text-black">{patient.Name}</h3> 
+                      <p className="text-[#285b23]">Gender: {patient.Gender}</p>
+                      <p className="text-[#285b23]">Age: {patient.Age}</p>
+                      <p className="text-[#285b23]">Condition: {patient.MedicalCondition}</p>
                     </div>
                     <Link href={`/patients/${patient._id}`} legacyBehavior>
                       <a className="text-blue-600 hover:underline">View Details</a>
